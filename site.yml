@@ -1,0 +1,13 @@
+---
+
+- name: configure quagga
+  hosts: quagga
+  roles:
+    - quagga
+
+- name: configure gixlg/exabgp
+  hosts: exabgp
+  roles:
+    - exabgp
+
+ ...

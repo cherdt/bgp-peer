@@ -1,0 +1,40 @@
+---
+
+# based on the instructions at http://xmodulo.com/centos-bgp-router-quagga.html
+
+- name: install quagga
+  apt:
+    name: quagga
+    state: latest
+
+- name: copy zebra.conf
+  copy:
+    src: zebra.conf
+    dest: /etc/quagga/zebra.conf
+
+- name: start and enable zebra service
+  systemd:
+    - name: zebra
+    - enabled: yes
+    - state: started
+
+- name: create quagga log directory
+  file:
+    path: /var/log/quagga
+    state: directory
+    mode: 0755
+    owner: quagga
+    group: quagga
+
+- name: copy bgpd.conf
+  copy:
+    src: bgpd.conf
+    dest: /etc/quagga/bgpd.conf
+
+- name: start and enable bgpd
+  systemd:
+    - name: bgpd
+    - enabled: yes
+    - state: started
+
+...

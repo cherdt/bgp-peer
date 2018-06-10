@@ -1,0 +1,60 @@
+---
+
+- name: install pip
+  apt:
+    name: python-pip
+    state: latest
+
+- name: install exabgp
+  pip:
+    name: exabgp
+    state: latest
+
+- name: install git
+  apt:
+    name: git
+    state: latest
+
+- name: clone gixlg repo
+  git:
+    repo: https://github.com/dpiekacz/gixlg.git
+    dest: /opt/gixlg
+
+- name: copy exabgp config
+  copy:
+    src: exabgp.conf
+    dest: /opt/gixlg/exabgp/sample.conf
+
+- name: install python radix
+  apt:
+    name: python-radix
+    state: latest
+  tags: gixlg
+
+- name: install mariadb
+  apt:
+    name: mariadb-server
+    state: latest
+  tags: gixlg
+
+- name: install python mysql connector
+  apt:
+    name: python-mysqldb
+    state: latest
+  tags: gixlg
+
+- name: start and enable mysql
+  systemd:
+    name: mariadb
+    enabled: yes
+    state: started
+  tags: gixlg
+
+- name: update mysqldb.sock
+  lineinfile:
+    path: /opt/gixlg/exabgp/collector.py
+    regexp: '^config\["mysql_sock"\] = '
+    line: config["mysql_sock"] = "/var/run/mysqld/mysqld.sock"
+  tags: gixlg
+
+...
