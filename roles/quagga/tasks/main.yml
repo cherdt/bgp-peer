@@ -14,9 +14,9 @@
 
 - name: start and enable zebra service
   systemd:
-    - name: zebra
-    - enabled: yes
-    - state: started
+    name: zebra
+    enabled: yes
+    state: started
 
 - name: create quagga log directory
   file:
@@ -33,8 +33,8 @@
 
 - name: start and enable bgpd
   systemd:
-    - name: bgpd
-    - enabled: yes
-    - state: started
+    name: bgpd
+    enabled: yes
+    state: started
 
 ...
