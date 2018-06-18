@@ -17,7 +17,7 @@ Set up 2 Debian VMs. I used VirtualBox with the Bridged Adapter with the followi
 
 Run the ansible playbook:
 
-    ansible-playbook -i hosts site.yml
+    ansible-playbook -i hosts --user --ask-pass site.yml
 
 Run exabgp on 192.168.0.200:
 
@@ -33,7 +33,11 @@ On 192.168.0.100:
 
     vtysh
     debian# configure terminal
-    debian(config)# network 192.168.99.0/24
+    debian(config)# router bgp 65321
+    debian(config-router)# network 192.168.99.0/24
+    debian(config-router)# exit
     debian(config)# exit
+    debian# write
+    debian# exit
 
 This route should be announced to ExaBGP.
