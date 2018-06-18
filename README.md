@@ -5,7 +5,7 @@ This is a rough example of setting up BGP peering using [Quagga](https://www.qua
 
 I barely know anything about BGP so if you see something crazy here, please let me know.
 
-I don't even know if this works, I'm just trying to keep track of the steps I've taken. So far I have 2 hosts that establish a connection and Quagga appears to be able to send routes to ExaBGP (though I don't know what it does with them). ExaBGP can send routes to Quagga, and I can't tell that Quagga cares. I really don't know what I'm doing.
+So far I have 2 hosts that establish a connection and Quagga appears to be able to send routes to ExaBGP (though I don't know what it does with them). ExaBGP can send routes to Quagga, but I can't tell that Quagga notices or cares.
 
 Instructions
 ------------
